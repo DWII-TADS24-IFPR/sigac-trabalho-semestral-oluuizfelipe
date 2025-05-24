@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
-            $table->string('senha');
+            $table->string('password');
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->foreignId('curso_id')->nullable()->constrained('cursos')->onDelete('set null');
             $table->timestamps();
