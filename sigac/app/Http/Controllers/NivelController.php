@@ -52,17 +52,25 @@ class NivelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Nivel $nivel)
+    public function edit(Nivel $nivel): View
     {
-        //
+        return view('admin.niveis.edit', compact('nivel'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Nivel $nivel)
+    public function update(Request $request, Nivel $nivel): RedirectResponse
     {
-        //
+
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255|unique:niveis,nome,' . $nivel->id,
+        ]);
+
+        $nivel->update($validatedData);
+
+        return redirect()->route('admin.niveis.index')
+                        ->with('success', 'Atualizado com sucesso!');
     }
 
     /**

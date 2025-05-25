@@ -21,8 +21,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin')
         ->name('admin.')
         ->group(function () {
-        Route::resource('niveis', NivelController::class);
-    });
+            Route::resource('niveis', NivelController::class)->parameters([
+                'niveis' => 'nivel',
+            ]);
+        });
 });
 
 require __DIR__.'/auth.php';
